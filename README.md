@@ -65,3 +65,4 @@ Alternatively, pushes to main will automatically be deployed to Github pages at 
 
 - fixed tables so you can sort
 
+- fixed red outline on search boxes to actually overlay the box- no margin
