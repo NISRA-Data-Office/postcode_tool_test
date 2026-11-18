@@ -34,7 +34,7 @@
     const rectY = 95.2;
 
     // mc - colour bar looked heavy with dark outlines round every block - now a slim rounded bar with very light grey lines
-    const barHeight = 4;
+    const barHeight = 5.5;
     const barRadius = barHeight / 2;
     const barY = rectY + (rectHeight - barHeight) / 2;
     const barOutline = '#c9c9c9';
