@@ -44,3 +44,24 @@ npm run build
 This creates a folder called "build" which contains the built website.
 
 Alternatively, pushes to main will automatically be deployed to Github pages at <https://nisra-data-office.github.io/postcode_tool/>.
+
+
+## CHANGES
+
+
+- PURPLE SEARCH BUTTON DOES NOTHING - fixed
+- DROPDOWN STAYS WHEN CLICKING AWAY - fixed
+- NO RESULTS FOUND NEVER SHOWS - fixed
+- About BOX DOES NOT UPDATE WHEN YOU SEARCH FROM AREA PAGE - fixed?
+
+- Alignment of red around search box when error - fixed offset
+- Typing PC without spaces works now
+
+- Scale design change- can choose from options - rounded/square - circle/line marker
+- changed text box above scale
+
+- changed the i icon so the info doesn't just appear instantly- transition
+- added transition for info boxes too
+
+- fixed tables so you can sort
+
