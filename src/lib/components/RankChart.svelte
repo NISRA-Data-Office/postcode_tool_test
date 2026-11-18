@@ -27,7 +27,7 @@
     const scaleWidth = 151.9;
     const scaleGroupX = -33.8;
     const scaleGroupY = $derived(name ? -88.2 : -93.2);
-    const rectWidth = 16.7;
+    const rectWidth = 17;
     const rectHeight = 6.6;
     const rectGap = 14.9;
     const rectX = 34.2;
@@ -44,10 +44,10 @@
     // mc - round bright markers looked out of place on the bar - now thin upright markers in calmer red and purple
     const markerWidth = 1.4;
     const markerHeight = 7.6;
-    const markerColour = '#cc3a2a';
-    const markerCompareColour = '#a94fc4';
-    const markerCx = $derived(rankProp ? rankProp * scaleWidth : undefined);
-    const markerCompareCx = $derived(rankCompareProp ? rankCompareProp * scaleWidth : null);
+    const markerColour = '#bf5143';
+    const markerCompareColour = '#8543bf';
+const markerCx = $derived(rankProp ? 0.7 + rankProp * (scaleWidth - 1.4) : undefined);
+const markerCompareCx = $derived(rankCompareProp ? 0.7 + rankCompareProp * (scaleWidth - 1.4) : null);
     const markerCy = $derived(rectY + scaleGroupY + rectHeight / 2);
 
     const labelLeft = '← 1 (Most deprived)';

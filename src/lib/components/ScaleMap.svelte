@@ -191,7 +191,7 @@
             <LineLayer
                 id="area-outline-selected"
                 paint={{
-                    'line-color': ['case', ['==', ['get', promoteId], selected], '#cc3a2a', '#000000'],
+                    'line-color': ['case', ['==', ['get', promoteId], selected], '#bf5143', '#000000'],
                     'line-width': ['case', ['==', ['get', promoteId], selected], 4, 0],
                     'line-opacity': ['case', ['==', ['get', promoteId], selected], 1, 0]
                 }}

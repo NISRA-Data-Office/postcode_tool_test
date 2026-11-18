@@ -1,7 +1,7 @@
-<div id="info-boxes" class="mb-4">
-	<details class="mb-3">
+<div id="info-boxes" class="mb-2">
+	<details class="mb-2">
 		<summary class="fs-5 text-navy"> What you can use the rankings for? </summary>
-		<div class="py-4">
+		<div class="py-1">
 			<p>You can use the rankings to:</p>
 			<ul class="tick-list">
 				<li>Compare areas to see which are more or less deprived</li>
@@ -18,9 +18,9 @@
 			</p>
 		</div>
 	</details>
-	<details class="mb-3">
+	<details class="mb-2">
 		<summary class="fs-5 text-navy"> What you should not use the rankings for? </summary>
-		<div class="py-4">
+		<div class="py-1">
 			<p>You should not use the rankings to:</p>
 			<ul class="x-list">
 				<li>Identify deprived people or groups – they describe areas, not individuals</li>
@@ -43,11 +43,11 @@
 			</ul>
 		</div>
 	</details>
-	<details class="mb-3">
+	<details class="mb-1">
 		<summary class="fs-5 text-navy">
 			Comparing the Multiple Deprivation Measure with the individual domains
 		</summary>
-		<div class="py-4">
+		<div class="py-1">
 			<p>
 				The seven types of deprivation each make up part of the overall measure. They are combined
 				using set weights.

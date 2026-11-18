@@ -144,7 +144,7 @@
         {#if showInvalid}
             <div
                 id="postcode-invalid"
-                class="postcode-invalid text-danger mt-1 position-absolute border border-secondary bg-white p-1"
+                class="postcode-invalid text-danger small ml-1.5 position-absolute border border-secondary bg-white p-1"
             >
                 No results found. Please check your postcode or area name and try again.
             </div>
