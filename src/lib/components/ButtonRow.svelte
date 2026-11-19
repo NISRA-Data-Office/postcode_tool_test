@@ -8,8 +8,15 @@
 	import { domainLabel } from '#lib/util/textHelpers.ts';
 	import type { Query } from '#lib/util/dataDownload.ts';
 
-	function sharePage() {
-		navigator.clipboard.writeText(page.url.toString());
+	async function sharePage() {
+		if (navigator.share) {
+			await navigator.share({
+				title: document.title,
+				url: page.url.toString()
+			});
+		} else {
+			await navigator.clipboard.writeText(page.url.toString());
+		}
 	}
 
 	let expanded = $state(false);

@@ -36,7 +36,9 @@
 	}
 
 	async function copySummary() {
-		const textParts = [summaryHeading.textContent, summaryText.textContent, 'Source: NISRA'];
+		const summary = summaryText.innerText;
+
+		const textParts = [summaryHeading.textContent, summary, 'Source: NISRA'];
 		const text = textParts.join('\n\n');
 		await navigator.clipboard.writeText(text);
 		textCopied.classList.remove('d-none');

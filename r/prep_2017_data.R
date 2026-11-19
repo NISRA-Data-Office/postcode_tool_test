@@ -27,6 +27,26 @@ soa <- sf::read_sf(fs::path(soa_dir, "SOA2011.shp"))
 colnames(soa)[1:2] <- c("area_code", "area_name")
 soa <- sf::st_transform(soa, "WGS84")
 
+# Loughs
+
+lakes <- sf::st_read("r/opendata_lakes_NI.geojson", quiet = TRUE)
+
+loughs <- lakes |>
+  filter(str_detect(name, regex("neagh|erne", ignore_case = TRUE)))
+
+stopifnot("Loughs not found in lakes layer" = nrow(loughs) > 0)
+
+loughs <- loughs |>
+  sf::st_make_valid() |>
+  sf::st_union() |>
+  sf::st_transform(4326)
+
+# Remove the loughs from SOA polygons so shorelines become part of the geometry
+soa <- sf::st_difference(
+  sf::st_make_valid(soa),
+  loughs
+)
+
 lgd_lkp_url <- "https://www.nisra.gov.uk/files/nisra/publications/11DC_Lookup_1_1.xls"
 lgd_lkp_tf <- download_tf(lgd_lkp_url, ext = "xls")
 
@@ -40,7 +60,7 @@ soa_simpl <- rmapshaper::ms_simplify(soa, keep = 0.1)
 
 # file extension needs to be json or can't use 'import ... from ...' with vite
 sf::write_sf(
-  soa_simpl, 
+  soa_simpl,
   "src/lib/assets/soa2011.json",
   driver = "GeoJSON",
   layer_options = "COORDINATE_PRECISION=6",
@@ -50,7 +70,7 @@ sf::write_sf(
 # second copy is for the nav map so it can run without loading the whole thing
 # this should be fixed
 sf::write_sf(
-  soa_simpl, 
+  soa_simpl,
   "static/public/map/soa2011.geojson",
   driver = "GeoJSON",
   layer_options = "COORDINATE_PRECISION=6",
@@ -69,7 +89,6 @@ lgd_bboxes <- lapply(sf::st_geometry(lgds), \(geom) {
 })
 
 ni_bbox <- unname(unclass(sf::st_bbox(soa_simpl)))[c(3, 2, 1, 4)]
-
 
 # deprivation data --------------------------------------------------------
 
@@ -96,9 +115,9 @@ domain_code <- function(x) {
   recode_values(x, from = from, to = to, default = NA_character_)
 }
 
-ranks <- ranks_raw |> 
-  mutate(domain = domain_code(STATISTIC)) |> 
-  filter(!is.na(domain)) |> 
+ranks <- ranks_raw |>
+  mutate(domain = domain_code(STATISTIC)) |>
+  filter(!is.na(domain)) |>
   select(domain, soa2001 = SOA, soa2001_name = `Super Output Area`, rank = VALUE)
 
 soa_data <- lapply(lgd_lkp$area_code, \(code) {
@@ -109,7 +128,7 @@ soa_data <- lapply(lgd_lkp$area_code, \(code) {
   names(ranks_list) <- area_ranks$domain
   lgd_row <- lgd_lkp[lgd_lkp$area_code == code, ]
   ur <- urban_rural$urban_rural[urban_rural$area_code == code]
-  
+
   list(
     code = code,
     name = area_nm,
@@ -135,7 +154,7 @@ lgd_data <- lapply(lgd_codes, \(code) {
     list(name = i_data[["name"]], ranks = i_data[["data"]][["ranks"]])
   })
   names(children_ranks) <- vapply(which(children), \(i) soa_data[[i]][["code"]], character(1))
-  
+
   list(
     code = code,
     name = nm,
@@ -155,11 +174,20 @@ ni_data <- list(
   data = list(
     ranks = lapply(soa_data, \(x) {
       list(
-        name = x[["name"]], 
-        lgd = x[["parents"]][[1]][["code"]], 
+        name = x[["name"]],
+        lgd = x[["parents"]][[1]][["code"]],
         ranks = x[["data"]][["ranks"]])
     })
   )
+)
+
+# For loading via fetch if required
+sf::write_sf(
+  loughs,
+  "static/public/map/loughs.geojson",
+  driver = "GeoJSON",
+  layer_options = "COORDINATE_PRECISION=6",
+  delete_dsn = TRUE
 )
 
 
@@ -187,7 +215,7 @@ walk(names(soa_data), \(soa) {
 
 cpd <- read_csv("https://raw.githubusercontent.com/nisra-explore/postcode-search/refs/heads/main/CPD_LIGHT.csv",
                 show_col_types = FALSE)
-cpd <- cpd |> 
+cpd <- cpd |>
   mutate(
     postcode = paste0(
       substr(PC5, 1, nchar(PC5) - 3),

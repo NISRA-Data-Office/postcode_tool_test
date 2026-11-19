@@ -369,7 +369,7 @@ table tr:not(:has(th)):hover {
 
 .form-select:focus-visible {
   outline: 3px solid #D4351C;
-  outline-offset: 1px;
+  outline-offset: -2px;
 }
 
 /* Nav buttons: draw focus inside the element so it can't be hidden */

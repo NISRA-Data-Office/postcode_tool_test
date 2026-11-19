@@ -6,22 +6,32 @@
 		name,
 		mdmRank,
 		domainRanks,
+		urbanRural,
 		count
 	}: {
 		name: string;
 		mdmRank: number;
 		domainRanks: { [key: string]: number };
+		urbanRural: string;
 		count: number;
 	} = $props();
-
-	let percent = $derived(mdmRank / count);
+	// shouldn't include the areas rank too
+	let percent = $derived((mdmRank - 1) / count);
 
 	let summaryHeading: HTMLHeadingElement;
 	let summaryText: HTMLDivElement;
 	let textCopied: HTMLSpanElement;
 
+	let urbanRuralDescription = $derived.by(() => {
+	let article = urbanRural.toLowerCase() === 'urban' ? 'an' : 'a';
+	let description = urbanRural.toLowerCase() === 'mixed urban/rural' ? 'mixed urban and rural' : urbanRural.toLowerCase();
+		return `${article} ${description} area`;
+	});
+
 	async function copySummary() {
-		const textParts = [summaryHeading.textContent, summaryText.textContent, 'Source: NISRA'];
+		const summary = summaryText.innerText;
+
+		const textParts = [summaryHeading.textContent, summary, 'Source: NISRA'];
 		const text = textParts.join('\n\n');
 		await navigator.clipboard.writeText(text);
 		textCopied.classList.remove('d-none');
@@ -57,7 +67,9 @@
 		<p class="mb-0">
 			{paragraph(mdmRank, count, percent)} <span class="text-purple fw-bold">{name}</span>
 		</p>
-
+		<p>
+			<span class="text-purple fw-bold">{name}</span> is classified as {urbanRuralDescription}.
+		</p>
 		<ul class="deprivation-headline">
 			{#each domains as domain (domain.code)}
 				{#if domain.code != 'mdm'}

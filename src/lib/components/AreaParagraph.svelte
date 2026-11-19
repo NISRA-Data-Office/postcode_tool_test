@@ -10,8 +10,8 @@
 		mdmRank: number;
 		count: number;
 	} = $props();
-
-	let percent = $derived(mdmRank / count);
+	// shouldn't include the areas rank too
+	let percent = $derived((mdmRank - 1) / count);
 </script>
 
 <h3 class="h2 mt-4">

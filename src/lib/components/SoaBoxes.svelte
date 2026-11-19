@@ -108,7 +108,7 @@
 					2,030 people.
 				</p>
 				<p>
-					{name} is in {urbanRuralDescription}.
+					{name} is classified as {urbanRuralDescription}.
 				</p>
 			</div>
 		</div>

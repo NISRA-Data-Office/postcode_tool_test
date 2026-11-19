@@ -142,6 +142,6 @@
 	aria-label="Download charts dropdown">Download</button
 >
 
-<AreaSummary {name} {mdmRank} {domainRanks} {count} />
+<AreaSummary {name} {mdmRank} {domainRanks} {count} {urbanRural} />
 
 <NextSteps {name} {parentCode} />

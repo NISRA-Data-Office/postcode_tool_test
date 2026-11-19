@@ -201,12 +201,12 @@
         <LineLayer
             id="area-outline-hover"
             paint={{
-                'line-color': [
-                    'case',
-                    ['boolean', ['feature-state', 'hover'], false],
-                    '#a94fc4',
-                    '#000000'
-                ],
+                    'line-color': [
+                        'case',
+                        ['boolean', ['feature-state', 'hover'], false],
+                        selected ? '#a94fc4' : '#bf5143',
+                        '#000000'
+                    ],
                 'line-width': ['case', ['boolean', ['feature-state', 'hover'], false], 4, 0],
                 'line-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0]
             }}
