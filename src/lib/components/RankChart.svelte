@@ -5,12 +5,14 @@
         rank,
         maxRank,
         rankCompare,
+        comparisonSelected = false,
         name,
         labels
     }: {
         rank?: number;
         maxRank: number;
         rankCompare?: number;
+        comparisonSelected?: boolean;
         name?: string;
         labels?: string;
     } = $props();
@@ -45,9 +47,9 @@
     const markerWidth = 1.4;
     const markerHeight = 7.6;
     const markerColour = '#bf5143';
-    const markerCompareColour = '#8543bf';
-const markerCx = $derived(rankProp ? 0.7 + rankProp * (scaleWidth - 1.4) : undefined);
-const markerCompareCx = $derived(rankCompareProp ? 0.7 + rankCompareProp * (scaleWidth - 1.4) : null);
+    const markerCompareColour = $derived(comparisonSelected ? '#8543bf' : '#bf5143');
+    const markerCx = $derived(rankProp ? 0.7 + rankProp * (scaleWidth - 1.4) : undefined);
+    const markerCompareCx = $derived(rankCompareProp ? 0.7 + rankCompareProp * (scaleWidth - 1.4) : null);
     const markerCy = $derived(rectY + scaleGroupY + rectHeight / 2);
 
     const labelLeft = '← 1 (Most deprived)';

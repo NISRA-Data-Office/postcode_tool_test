@@ -48,6 +48,13 @@
 	let hoveredName: string | undefined = $derived(
 		hoveredArea && areaData ? areaData.data.ranks[hoveredArea]?.name : undefined
 	);
+	$effect(() => {
+    console.log({
+        hoveredArea,
+        hoveredRank,
+        selectedRank
+    });
+});
 </script>
 
 <div class="row mb-4">

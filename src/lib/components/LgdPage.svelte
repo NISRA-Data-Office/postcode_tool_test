@@ -156,6 +156,7 @@
 					<RankChart
 						rank={selectedRank}
 						rankCompare={hoveredRank}
+						comparisonSelected={!!selected}
 						maxRank={childrenType.count}
 						labels="below"
 					/>
