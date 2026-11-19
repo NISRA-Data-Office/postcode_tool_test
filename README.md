@@ -43,7 +43,7 @@ npm run build
 
 This creates a folder called "build" which contains the built website.
 
-Alternatively, pushes to main will automatically be deployed to Github pages at <https://nisra-data-office.github.io/postcode_tool/>.
+Alternatively, pushes to main will automatically be deployed to Github pages at <https://nisra-data-office.github.io/postcode_tool_test/>.
 
 
 ## CHANGES
@@ -65,3 +65,4 @@ Alternatively, pushes to main will automatically be deployed to Github pages at 
 
 - fixed tables so you can sort
 
+- fixed red outline on search boxes to actually overlay the box- no margin
